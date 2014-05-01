@@ -13,6 +13,42 @@ Rect.prototype.draw = function(ctx) {
 	ctx.fillRect(this.x, this.y, this.w, this.h);
 };
 
+Rect.prototype.drawPlayer1 = function(ctx) {
+	ctx.save();
+
+	ctx.translate(this.x, this.y);
+	ctx.lineWidth = .1*Math.min(this.h, this.w);
+	ctx.strokeStyle = "black";
+	ctx.lineCap = "round";
+	ctx.beginPath();
+	ctx.moveTo(this.w*.1, this.h*.1);
+	ctx.lineTo(this.w*.9, this.h*.9);
+	ctx.moveTo(this.w*.1, this.h*.9);
+	ctx.lineTo(this.w*.9, this.h*.1);
+	ctx.stroke();
+
+	ctx.restore();
+}
+
+Rect.prototype.drawPlayer2 = function(ctx) {
+	ctx.save();
+
+	ctx.strokeStyle = "black";
+	ctx.lineWidth = .1*min(this.w, this.h);
+	ctx.translate(this.x, this.y);
+	var start = [this.w*.15, this.h/2];
+	var stop = [this.w*.85, this.h/2];
+	var control_point_high = this.h/30;
+	var control_point_low = 29*this.h/30;
+	ctx.beginPath();
+	ctx.moveTo(start[0], start[1]);
+	ctx.bezierCurveTo(start[0], control_point_high, stop[0], control_point_high, stop[0], stop[1]);
+	ctx.bezierCurveTo(stop[0], control_point_low, start[0], control_point_low, start[0], start[1]);
+	ctx.stroke();
+
+	ctx.restore();
+}
+
 function MiniBoard(index) {
 	this.row = Math.floor(index/3);
 	this.col = index%3;
@@ -29,14 +65,27 @@ MiniBoard.prototype.createElements = function() {
 	var size = element_size + small_line;
 	for (var i = 0; i < 9; i++) {
 		var row = Math.floor(i/3), col = i%3;
-		this.elements[i] = new Rect(
+		var box = new Object();
+		box.rect = new Rect(
 				this.x + inner_margin + col*size,
 				this.y + inner_margin + row*size,
 				element_size,
 				element_size,
 				"blue");
+		box.winner = n;
+		this.elements[i] = box;
 	}
 };
+
+MiniBoard.prototype.fillElement = function(ctx, player, element) {
+	if (player === 1) {
+		this.elements[element].drawPlayer1(ctx);
+	} else if (player === 2) {
+		this.elements[element].drawPlayer2(ctx);
+	} else {
+		displayError();
+	}
+}
 
 function CanvasBoard(canvas) {
 	this.ctx = canvas.getContext("2d");
