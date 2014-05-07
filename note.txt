@@ -1,0 +1,8 @@
+What should I do:
+1.)Game run through BigBoard and LittleBoard objects and have the graphics controlled by the MiniBoard/CanvasBoard objects (this seems confusing and overly complicated)
+2.) Wrap the game into one big object which I can then put into the canvas object (will take some making-over but should be better). Encapsulating the game seems like the better option since I could change the graphics independently of the game.
+
+
+*Ideas*
+
+creating a tic-tac-toe board which can hold tic-tac-toe boards (all the same class)--if I could do this then it would simplify the code. But the two boards aren't the same. I could use inheritence. The big board could have more specific features and inherit from the simple small board. This might not be possible or be very complicated because the big board contains small boards where as the small board contains elements.

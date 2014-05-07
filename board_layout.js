@@ -65,15 +65,15 @@ MiniBoard.prototype.createElements = function() {
 	var size = element_size + small_line;
 	for (var i = 0; i < 9; i++) {
 		var row = Math.floor(i/3), col = i%3;
-		var box = new Object();
-		box.rect = new Rect(
+		//var box = new Object();
+		this.elements[i] = new Rect(
 				this.x + inner_margin + col*size,
 				this.y + inner_margin + row*size,
 				element_size,
 				element_size,
 				"blue");
-		box.winner = n;
-		this.elements[i] = box;
+		//box.winner = n;
+		//this.elements[i] = box;
 	}
 };
 
