@@ -6,3 +6,8 @@ What should I do:
 *Ideas*
 
 creating a tic-tac-toe board which can hold tic-tac-toe boards (all the same class)--if I could do this then it would simplify the code. But the two boards aren't the same. I could use inheritence. The big board could have more specific features and inherit from the simple small board. This might not be possible or be very complicated because the big board contains small boards where as the small board contains elements.
+
+In "board_layout.js"
+Create object which takes canvas object as parameter
+Big Canvas Object: 
+Small Canvas Object:
